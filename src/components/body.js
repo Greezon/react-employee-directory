@@ -1,5 +1,6 @@
 import Axios from "axios"
 import React from "react"
+import { MDBDataTable } from "mdbreact"
 
 class Body extends React.Component {
 	state = {
@@ -23,15 +24,46 @@ class Body extends React.Component {
 					employeeList.push(element)
 
 				}
-				this.setState(employeeList)
-				console.log(employeeList)
+				this.setState({ employeeList: employeeList }, () => {
+					console.log(this.state.employeeList)
+				})
 			})
 
 	}
 	render() {
+		const dataTable = {
+			columns: [
+				{
+					label: "First Name",
+					field: "firstName"
+				},
+				{
+					label: "Last Name",
+					field: "lastName"
+				},
+				{
+					label: "City",
+					field: "city"
+				},
+				{
+					label: "State",
+					field: "state"
+				},
+				{
+					label: "Email",
+					field: "email"
+				},
+				{
+					label: "Phone",
+					field: "phone"
+				}
+			],
+			rows: this.state.employeeList
+		}
 		return (
+
 			<div>
-				<h1>employeeList</h1>
+				<MDBDataTable data={dataTable} />
 			</div>
 		)
 	}
